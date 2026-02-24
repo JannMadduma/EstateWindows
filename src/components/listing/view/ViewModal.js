@@ -14,52 +14,56 @@ import ShareIcon from "@mui/icons-material/Share";
 import CallToAction from "../../common/CallToAction";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+    return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const pagesAll = [{ name: "Listing", link: "/listing" }];
 
 export default function ViewModal({ open, setOpen, property }) {
-  const loggedIn = useSelector((state) => state.loggedIn);
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [pages, setPages] = React.useState([]);
+    const loggedIn = useSelector((state) => state.loggedIn);
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [pages, setPages] = React.useState([]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
-  React.useEffect(() => {
-    if (loggedIn?.role === "admin") {
-      setPages([...pagesAll]);
-    } else {
-      setPages(pagesAll);
-    }
-  }, [loggedIn]);
+    React.useEffect(() => {
+        if (loggedIn?.role === "admin") {
+            setPages([...pagesAll]);
+        } else {
+            setPages(pagesAll);
+        }
+    }, [loggedIn]);
 
-  return (
-    <Dialog
-      fullScreen
-      open={open}
-      onClose={handleClose}
-      TransitionComponent={Transition}
-    >
-      <Toolbar
-        sx={{ borderBottom: 1, borderColor: "divider" }}
-        style={{ padding: "0 150px" }}
-      >
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <Link to={"/"}>
-            <Avatar alt="Photo" src="/img/logo.png" variant="square" />
-          </Link>
-          {/* 
+    return (
+        <Dialog
+            fullScreen
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Transition}
+        >
+            <Toolbar
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+                style={{ padding: "0 150px" }}
+            >
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                    <Link to={"/"}>
+                        <Avatar
+                            alt="Photo"
+                            src="img/logo.png"
+                            variant="square"
+                        />
+                    </Link>
+                    {/* 
         {pages.map((page) => (
           <Button
             key={page.name}
@@ -78,53 +82,53 @@ export default function ViewModal({ open, setOpen, property }) {
           </Button>
         ))}
       */}
-        </Box>
-        <Box color="gray" align="center" noWrap sx={{ flex: 1 }}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
-          ></IconButton>
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={handleClose}
-            aria-label="close"
-          ></IconButton>
-        </Box>
+                </Box>
+                <Box color="gray" align="center" noWrap sx={{ flex: 1 }}>
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        onClick={handleClose}
+                        aria-label="close"
+                    ></IconButton>
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        onClick={handleClose}
+                        aria-label="close"
+                    ></IconButton>
+                </Box>
 
-        <IconButton
-          edge="start"
-          color="inherit"
-          onClick={handleClose}
-          aria-label="close"
-        >
-          <CloseIcon />
-        </IconButton>
-      </Toolbar>
-      <Toolbar
-        component="nav"
-        variant="dense"
-        sx={{ justifyContent: "space-between", overflowX: "auto" }}
-      ></Toolbar>
+                <IconButton
+                    edge="start"
+                    color="inherit"
+                    onClick={handleClose}
+                    aria-label="close"
+                >
+                    <CloseIcon />
+                </IconButton>
+            </Toolbar>
+            <Toolbar
+                component="nav"
+                variant="dense"
+                sx={{ justifyContent: "space-between", overflowX: "auto" }}
+            ></Toolbar>
 
-      <Container>
-        <Box
-          sx={{
-            display: "flex",
-            alignSelf: "start",
-          }}
-        >
-          <ListingGallery property={property} />
-        </Box>
-      </Container>
-      <Container sx={{ paddingBottom: "50px" }}>
-        <Description />
-      </Container>
-      <Container sx={{ paddingBottom: "100px" }}>
-        <CallToAction />
-      </Container>
-    </Dialog>
-  );
+            <Container>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignSelf: "start",
+                    }}
+                >
+                    <ListingGallery property={property} />
+                </Box>
+            </Container>
+            <Container sx={{ paddingBottom: "50px" }}>
+                <Description />
+            </Container>
+            <Container sx={{ paddingBottom: "100px" }}>
+                <CallToAction />
+            </Container>
+        </Dialog>
+    );
 }
